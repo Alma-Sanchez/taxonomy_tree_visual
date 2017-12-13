@@ -43,7 +43,6 @@
 </style>
 <body>
   <div id='confirmation' style="padding:5px;width:100%;border:1px solid black;font-family:sans-serif">
-    <b>Taxonomy Version: <span id="taxonomy_version"></span></b>
     <span style="float:right;padding-right:15px;"><input id="pathname" type="text"></input> has been copied to the clipboard.
   </div>
 <script src="https://d3js.org/d3.v3.min.js"></script>
@@ -83,9 +82,7 @@ d3.json("taxonomy_tree.json", function(error, flare) {
 d3.select(self.frameElement).style("height", "1000px");
 
 function update(source) {
-  // Display version
-  taxonomy_version.innerHTML= source.version;
-  // Compute the new tree layout.
+   // Compute the new tree layout.
   var nodes = tree.nodes(root).reverse(),
       links = tree.links(nodes);
 
@@ -110,7 +107,7 @@ function update(source) {
       .attr("x", function(d) { return d.children || d._children ? -10 : 10; })
       .attr("dy", ".35em")
       .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
-      .text(function(d) { return d.name; })
+      .text(function(d) { return d.label; })
       .style("fill-opacity", 1e-6);
 
   // Transition nodes to their new position.
